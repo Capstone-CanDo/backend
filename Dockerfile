@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 서버 실행
-CMD gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn configs.wsgi:application --bind 0.0.0.0:$PORT
