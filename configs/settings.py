@@ -95,11 +95,11 @@ AUTH_USER_MODEL = 'accounts.User'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "127.0.0.1", 
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "NAME": os.getenv("PGDATABASE"),
+        "USER": os.getenv("PGUSER"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
+        "HOST": os.getenv("PGHOST"),
+        "PORT": os.getenv("PGPORT"),
     }
 }
 
