@@ -12,5 +12,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 프로젝트 전체 복사
 COPY . .
 
-# migrate & 서버 실행
-CMD python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+# 서버 실행
+CMD gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
