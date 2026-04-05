@@ -94,15 +94,12 @@ AUTH_USER_MODEL = 'accounts.User'
 #Databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "127.0.0.1",  # localhost 대신 IP로
-        "PORT": os.getenv("DB_PORT", "3306"),
-        "OPTIONS": {
-            "unix_socket": "/tmp/mysql.sock",  # 소켓 경로 명시
-        },
+        "HOST": "127.0.0.1", 
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
@@ -156,6 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # CORS
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
     'GET',
