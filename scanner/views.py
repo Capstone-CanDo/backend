@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import ScanResult
 from .serializers import ScanRequestSerializer, ScanResultSerializer
 from .services import analyze_url
-# from explanations.services import generate_explanation
+from explanations.services import generate_explanation
 
 # Create your views here.
 class ScanView(APIView):
@@ -28,13 +28,19 @@ class ScanView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
+        # 2. XAI 설명 생성
+        try:
+            explanation = generate_explanation(url, raw)
+        except Exception:
+            explanation = None  # GPT 실패해도 스캔 결과는 저장
+
         # DB 저장
         scan = ScanResult.objects.create(
             user=request.user,
             travel_id=travel_id,
             url=url,
             is_phishing=raw["is_phishing"],
-            explanation=None, #XAI 기능 구현 후 수정
+            explanation=explanation, 
         )
 
         return Response(
